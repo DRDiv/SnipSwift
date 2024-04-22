@@ -7,10 +7,17 @@ import {
 
 import Container from 'react-bootstrap/Container';
 
+
 import Home from './contents/Home';
 import About from './contents/About';
 import Experience from './contents/Experience';
 import Contact from './contents/Contact';
+import Dropdown from './components/Dropdown';
+import Abstractive from './contents/Abstractive';
+import Transcript from './contents/Transcript';
+import Extractive from './contents/Extractive';
+import TextArea from './contents/TextArea';
+
 
 import logo from './assets/resources/logo_transprntbk.png';
 
@@ -103,8 +110,12 @@ class App extends Component {
                                     <NavLink to="/home" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/about" className={({ isActive }) => isActive ? "active" : ""}>Get Summary</NavLink>
+                                    <NavLink to="/transcript" className={({ isActive }) => isActive ? "active" : ""}>Transcript</NavLink>
                                 </li>
+                                <li className="dropdown"> {/* Add dropdown class */}
+                                        <Dropdown /> {/* Render the Dropdown component directly */}
+                                    </li>
+                               
                                 
                             </ul>
                         </nav>
@@ -121,6 +132,12 @@ class App extends Component {
                         <Route path="/about" component={About}/>
                         <Route path="/expedu" component={Experience}/>
                         <Route path="/contact" component={Contact}/>
+                        <Route path="/transcript" component={Transcript}/>
+                        <Route path="/extractive" component={Extractive}/>
+                        <Route path="/abstractive" component={Abstractive}/>
+                        <Route path="/textarea" component={TextArea}/>
+                        
+                        
                     </div>
                 </Container>
             </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import './input.css'; // Import the CSS file
 
 class InputField extends Component {
@@ -19,6 +20,7 @@ class InputField extends Component {
     handleSubmit(event) {
         alert('A form was submitted: ' + this.state.value);
         event.preventDefault();
+        this.props.history.push('/textarea');
     }
 
     render() {
@@ -33,4 +35,4 @@ class InputField extends Component {
     }
 }
 
-export default InputField;
+export default withRouter(InputField);
