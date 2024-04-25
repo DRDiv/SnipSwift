@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Skills from '../components/Skills';
+import TypewriterEffect from "react-typewriter-effect";
 import InputField from '../components/Input';
 
 class Extractive extends Component {
@@ -11,11 +11,19 @@ class Extractive extends Component {
 
         return (
             <div className="container">
-                <div style={headingStyle}>
-                    <h1>Extractive Summary</h1>
+                 <TypewriterEffect
+                                textStyle={
+                                    { fontWeight: 'bold', fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: '1.2',textAlign: 'center'}
+                                }
+                                startDelay={100}
+                                cursorColor="black"
+                                text="Extractive Summary Generator"
+                                typeSpeed={50}
+                                hideCursorAfterText={true}
+                            />
                     <InputField/>
                 </div>
-            </div>
+          
         );
     }
 }

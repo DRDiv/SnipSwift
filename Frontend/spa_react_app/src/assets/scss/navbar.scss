@@ -43,6 +43,7 @@ header {
     }
 
     .navbar {
+       
         box-shadow: none;
         
         ul {
@@ -105,16 +106,23 @@ header {
 }
 
 @include laptop {
+    
     header {
         padding: 1rem 0 1rem 0;
     }
 }
 
 @include mobile {
+    .navbar{
+        
+        display: none !important;
+    }
+    
     .mobile-nav-toggle {
         color: #C85946;
         display: block;
-        top: 15px;
+        padding: 1.5rem;
+        
 
         &.bi-x {
             position: absolute;
@@ -123,9 +131,10 @@ header {
             z-index: 999;
         }
     }
-
+    
     .navbar-mobile {
-        width: 100%;
+        
+        width: 60%;
         position: fixed !important;
         overflow: hidden;
         top: 0;
@@ -135,7 +144,7 @@ header {
         background: rgba(63, 73, 83, 0.9);
         transition: 0.3s;
         z-index: 999;
-
+        display: block !important;
         ul {
             width: 95%;
             
@@ -149,10 +158,11 @@ header {
             background-color: #fff;
             overflow-y: auto;
             transition: 0.3s;
+           
 
             li {
                 padding: 0.65rem 1.5rem;
-
+                
                 a {
                     font-size: 0.875rem;
                     padding-bottom: 0.3rem;
@@ -161,17 +171,12 @@ header {
         }
     }
 
-    .navbar {
-        padding: 0 !important;
-
-        ul {
-            display: none;
-        }
-    }
+   
 }
 
 @media (max-width: 575px) {
     .navbar-mobile ul {
+      
         width: 90%;
     }
 }

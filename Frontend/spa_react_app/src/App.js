@@ -9,14 +9,12 @@ import Container from 'react-bootstrap/Container';
 
 
 import Home from './contents/Home';
-import About from './contents/About';
-import Experience from './contents/Experience';
-import Contact from './contents/Contact';
-import Dropdown from './components/Dropdown';
+
+
 import Abstractive from './contents/Abstractive';
 import Transcript from './contents/Transcript';
 import Extractive from './contents/Extractive';
-import TextArea from './contents/TextArea';
+import TextDisplay from './contents/TextDisplay';
 
 
 import logo from './assets/resources/logo_transprntbk.png';
@@ -78,6 +76,8 @@ class App extends Component {
          * Mobile nav toggle
          */
         on('click', '.mobile-nav-toggle', function(e) {
+            
+            
             select('#navbar').classList.toggle('navbar-mobile')
             this.classList.toggle('bx-list-ul')
             this.classList.toggle('bx-x')
@@ -107,15 +107,18 @@ class App extends Component {
                         <nav id="navbar" className="navbar">
                             <ul>
                                 <li>
-                                    <NavLink to="/home" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
+                                    <NavLink to="/home">Home</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/transcript" className={({ isActive }) => isActive ? "active" : ""}>Transcript</NavLink>
+                                    <NavLink to="/transcript">Transcript</NavLink>
                                 </li>
-                                <li className="dropdown"> {/* Add dropdown class */}
-                                        <Dropdown /> {/* Render the Dropdown component directly */}
-                                    </li>
-                               
+                                <li>
+                                    <NavLink to="/abstractive">Abstractive</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/extractive">Extractive</NavLink>
+                                </li>
+
                                 
                             </ul>
                         </nav>
@@ -129,13 +132,13 @@ class App extends Component {
                     <div className="content">
                         <Route exact path="/" component={Home}/>
                         <Route path="/home" component={Home}/>
-                        <Route path="/about" component={About}/>
-                        <Route path="/expedu" component={Experience}/>
-                        <Route path="/contact" component={Contact}/>
+                        
+                       
                         <Route path="/transcript" component={Transcript}/>
                         <Route path="/extractive" component={Extractive}/>
                         <Route path="/abstractive" component={Abstractive}/>
-                        <Route path="/textarea" component={TextArea}/>
+                       
+                        
                         
                         
                     </div>

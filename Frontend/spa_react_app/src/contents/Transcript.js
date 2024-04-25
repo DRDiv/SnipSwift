@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
+import TypewriterEffect from "react-typewriter-effect";
 
-import Skills from '../components/Skills';
 import InputField from '../components/Input';
 
 class Transcript extends Component {
     render () {
-        const headingStyle = {
-            textAlign: 'center'
-        };
+        
 
         return (
             <div className="container">
-                <div style={headingStyle}>
-                    <h1>Transcript</h1>
+               
+                <TypewriterEffect
+                                textStyle={
+                                    { fontWeight: 'bold', fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: '1.2',textAlign: 'center'}
+                                }
+                                startDelay={100}
+                                cursorColor="black"
+                                text="Transcript Generator"
+                                typeSpeed={50}
+                                hideCursorAfterText={true}
+                            />
                     <InputField/>
                 </div>
-            </div>
+          
         );
     }
 }
