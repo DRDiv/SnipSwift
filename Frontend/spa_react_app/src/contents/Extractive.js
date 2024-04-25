@@ -21,7 +21,7 @@ class Extractive extends Component {
                                 typeSpeed={50}
                                 hideCursorAfterText={true}
                             />
-                    <InputField/>
+                    <InputField value='3'></InputField>
                 </div>
           
         );

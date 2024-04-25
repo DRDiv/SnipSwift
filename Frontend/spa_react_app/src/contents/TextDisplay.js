@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import braille from 'braille';
 import { 
     Container,
     Row,
@@ -87,7 +87,7 @@ class TextDisplay extends Component {
                                 }
                                 startDelay={2000}
                                 cursorColor="black"
-                                text={""}
+                                text={braille.toBraille(texts[0])}
                                 typeSpeed={25}
                                 hideCursorAfterText={true}
                             />

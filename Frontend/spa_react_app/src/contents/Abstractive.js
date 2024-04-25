@@ -22,7 +22,7 @@ class Abstractive extends Component {
                                 hideCursorAfterText={true}
                             />
                    
-                    <InputField/>
+                   <InputField value='2'></InputField>
                 </div>
           
         );

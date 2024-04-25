@@ -20,7 +20,8 @@ class Transcript extends Component {
                                 typeSpeed={50}
                                 hideCursorAfterText={true}
                             />
-                    <InputField/>
+                            <InputField value='1'></InputField>
+                    
                 </div>
           
         );

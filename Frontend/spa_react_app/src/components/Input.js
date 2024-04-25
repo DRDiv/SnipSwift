@@ -8,12 +8,12 @@ class InputField extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
+            value: this.props.value,
             texts: [], // Added state to store fetched texts
             submitted: false, // Added state to track whether the form is submitted
             loading: false // Added state to track loading state
         };
-
+        console.log(this.state.value);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -24,23 +24,23 @@ class InputField extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        // var FinalURL = `http://127.0.0.1:5000/?url=${this.state.value}`;
+        var FinalURL = `http://127.0.0.1:5000/?url=${this.state.value}`;
 
-        // // Set loading state to true when starting the fetch
-        // this.setState({ loading: true });
+        // Set loading state to true when starting the fetch
+        this.setState({ loading: true });
 
-        // fetch(FinalURL)
-        //     .then((res) => res.json())
-        //     .then((result) => {
-        //         console.log(result);
-        //         // Assuming result.texts is an array containing texts in different languages
-        //         this.setState({ texts: result.texts, submitted: true, loading: false });
-        //     })
-        //     .catch(error => {
-        //         console.error('Error fetching data:', error);
-        //         // Handle errors here
-        //         this.setState({ loading: false });
-        //     });
+        fetch(FinalURL)
+            .then((res) => res.json())
+            .then((result) => {
+                console.log(result);
+               
+                this.setState({ texts: result.texts, submitted: true, loading: false });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                // Handle errors here
+                this.setState({ loading: false });
+            });
     }
 
     render() {
