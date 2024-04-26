@@ -89,6 +89,25 @@ class TextDisplay extends Component {
         });
     }
 
+    downloadTxtFile = () => {
+        const element = document.createElement("a");
+        const file = new Blob([this.state.displayText], {type: 'text/plain'});
+        element.href = URL.createObjectURL(file);
+       
+        if (this.state.selectedLanguage === 'English') {
+            element.download = "English.txt";
+        } else if (this.state.selectedLanguage === 'Hindi') {
+            element.download = "Hindi.txt";
+        } else if (this.state.selectedLanguage === 'Gujarati') {
+            element.download = "Gujarati.txt";
+        } else if (this.state.selectedLanguage === 'Braille') {
+            element.download = "Braille.txt";
+        }
+        
+        document.body.appendChild(element); // Required for this to work in Firefox
+        element.click();
+    }
+
     render() {
         const { selectedLanguage, displayText, key, isSpeaking } = this.state;
 
@@ -112,6 +131,9 @@ class TextDisplay extends Component {
                             </DropdownButton>
                             <Button onClick={this.toggleTextToSpeech} variant={isSpeaking ? 'success' : 'red'} style={{ marginLeft: '10px' }}>
                                 <FontAwesomeIcon icon={isSpeaking ? faVolumeMute : faVolumeUp} />
+                            </Button>
+                            <Button onClick={this.downloadTxtFile} variant="dark" style={{ marginLeft: '10px' }}>
+                                Download as .txt
                             </Button>
                         </div>
                         <div className='typewriter' key={key}>
