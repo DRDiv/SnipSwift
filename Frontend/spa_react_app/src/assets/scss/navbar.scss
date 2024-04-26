@@ -35,7 +35,8 @@ header {
         position: fixed;
         top: 0;
         max-width: calc(1920px + 10%);
-        padding: 0.25rem 1rem 0.25rem 1rem;
+        height: 5rem;
+        padding: 1.25rem 1rem 1.25rem 1rem;
 
         .container {
             max-width: unset;
@@ -83,6 +84,7 @@ header {
 
             &:last-child {
                 margin-right: 0;
+                
             }
         }
     }

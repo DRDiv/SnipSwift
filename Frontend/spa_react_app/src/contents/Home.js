@@ -23,7 +23,7 @@ class Home extends Component {
         return (
             <Container className='homepage'>
                 <Row>
-                    <Col lg={7} className='order-2 order-sm-1'>
+                    <Col lg={9} className='order-2 order-sm-1'>
                         <div className='typewriter1'>
                             <TypewriterEffect
                                 textStyle={
@@ -42,13 +42,18 @@ class Home extends Component {
                                 textStyle={
                                     { fontWeight: '400', fontSize: '1.2rem', marginBottom: '2rem' }
                                 }
-                                startDelay={1600}
+                                startDelay={1000}
                                 cursorColor="black"
-                                text="Your one stop to summarize a youtube transcipt"
-                                typeSpeed={40}
+                                text="Welcome to SnipSwift, your ultimate solution for summarizing YouTube transcripts effortlessly.
+
+                                Are you tired of sifting through lengthy YouTube transcripts to extract key information? Say goodbye to hours of manual labor with SnipSwift. Our innovative platform condenses lengthy transcripts into concise summaries, saving you valuable time and effort.
+                                                                
+                                Experience the power of simplicity with SnipSwift today. Say hello to streamlined content consumption and goodbye to information overload. Join SnipSwift and unlock a world of efficiency in video content analysis."
+                                typeSpeed={20}
                                 hideCursorAfterText={true}
                             />
                         </div>
+                        
                     </Col>
                     
                 </Row>
