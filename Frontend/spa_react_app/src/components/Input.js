@@ -8,7 +8,8 @@ class InputField extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.value,
+            value: '',
+            index:this.props.value,
             texts: [], // Added state to store fetched texts
             submitted: false, // Added state to track whether the form is submitted
             loading: false // Added state to track loading state
@@ -32,9 +33,21 @@ class InputField extends Component {
         fetch(FinalURL)
             .then((res) => res.json())
             .then((result) => {
-                console.log(result);
-               
-                this.setState({ texts: result.texts, submitted: true, loading: false });
+                result=result.data;
+                
+                var textTemp;
+                if (this.state.index=='1'){
+                    textTemp=[result["original_trans"],result["original_trans_hin"],result["original_trans_guj"]];
+                }
+                else if (this.state.index=='2'){
+                    textTemp=[result["abstractive_data"]["eng_summary"],result["abstractive_data"]["hind_summary"],result["abstractive_data"]["guj_summary"]];
+
+                }
+                else{
+                    textTemp=[result["extractive_data"]["eng_summary"],result["extractive_data"]["hind_summary"],result["data"]["extractive_data"]["guj_summary"]];
+                }
+                
+                this.setState({ texts: textTemp, submitted: true, loading: false });
             })
             .catch(error => {
                 console.error('Error fetching data:', error);

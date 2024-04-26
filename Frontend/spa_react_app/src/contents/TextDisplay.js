@@ -1,102 +1,129 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import braille from 'braille';
 import { 
     Container,
     Row,
-    Col
+    Col,
+    DropdownButton,
+    Dropdown,
+    Button
 } from 'react-bootstrap';
 
 import TypewriterEffect from "react-typewriter-effect";
 import AOS from 'aos';
 
-
-
 import '../assets/scss/home.scss';
 
+// Import FontAwesome icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
+
 class TextDisplay extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedLanguage: 'English',
+            displayText: props.texts[0], // Initialize displayText with the default text
+            key: 1, // Key for triggering component rebuild
+            isSpeaking: false // Flag to indicate whether text-to-speech is active
+        };
+        this.synth = window.speechSynthesis;
+        this.synth.onvoiceschanged = this.populateVoices;
+        this.voices = [];
+    }
+
     componentDidMount() {
         AOS.init();
     }
 
+    populateVoices = () => {
+        this.voices = this.synth.getVoices();
+    }
+
+    handleLanguageChange = (language) => {
+        let newText;
+        if (language === 'English') {
+            newText = this.props.texts[0];
+        } else if (language === 'Hindi') {
+            newText = this.props.texts[1];
+        } else if (language === 'Gujarati') {
+            newText = this.props.texts[2];
+        } else if (language === 'Braille') {
+            const brailleText = braille.toBraille(this.props.texts[0]);
+            // Split Braille text into lines
+            const lines = [];
+            for (let i = 0; i < brailleText.length; i += 10) {
+                lines.push(brailleText.substr(i, 10));
+            }
+            newText = lines.join('\n');
+        }
+        this.setState(prevState => ({
+            selectedLanguage: language,
+            displayText: newText,
+            key: prevState.key + 1 // Incrementing key to trigger component rebuild
+        }), () => {
+            if (this.state.isSpeaking) {
+                this.speakText(newText);
+            }
+        });
+    }
+
+    speakText = (text) => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        // Set voice if available
+        if (this.voices.length > 0) {
+            utterance.voice = this.voices.find(voice => voice.lang === 'en-US'); // Adjust language as needed
+        }
+        this.synth.speak(utterance);
+    }
+
+    toggleTextToSpeech = () => {
+        this.setState(prevState => ({
+            isSpeaking: !prevState.isSpeaking
+        }), () => {
+            if (this.state.isSpeaking) {
+                this.speakText(this.state.displayText);
+            } else {
+                this.synth.cancel();
+            }
+        });
+    }
+
     render() {
-        const { texts } = this.props;
+        const { selectedLanguage, displayText, key, isSpeaking } = this.state;
+
+        const textStyle = { fontWeight: '400', fontSize: '1rem', marginBottom: '2rem' };
+
         return (
             <Container className='homepage'>
-                <Row>
-                    <Col lg={11} className='order-2 order-sm-1'>
-                   
-                       
-                    <div style={{ fontWeight: 'bold', fontSize: '2rem', marginBottom: '2rem', lineHeight: '1.2' }}>
-                            English
+                <Row className='justify-content-center'>
+                    <Col lg={12} className='order-2 order-sm-1'>
+                        <div className='text-center' style={{ marginBottom: '20px',marginTop:'20px' }}>
+                            <DropdownButton
+                                id="dropdown-basic-button"
+                                title={selectedLanguage}
+                                onSelect={this.handleLanguageChange}
+                                variant='dark'
+                            >
+                                <Dropdown.Item eventKey="English">English</Dropdown.Item>
+                                <Dropdown.Item eventKey="Hindi">Hindi</Dropdown.Item>
+                                <Dropdown.Item eventKey="Gujarati">Gujarati</Dropdown.Item>
+                                <Dropdown.Item eventKey="Braille">Braille</Dropdown.Item>
+                            </DropdownButton>
+                            <Button onClick={this.toggleTextToSpeech} variant={isSpeaking ? 'success' : 'red'} style={{ marginLeft: '10px' }}>
+                                <FontAwesomeIcon icon={isSpeaking ? faVolumeMute : faVolumeUp} />
+                            </Button>
                         </div>
-                       
-                        <div className='typewriter2'>
+                        <div className='typewriter' key={key}>
                             <TypewriterEffect
-                                textStyle={
-                                    { fontWeight: '400', fontSize: '1.2rem', marginBottom: '2rem' }
-                                }
-                                startDelay={2000}
-                                text={texts[0]}
+                                textStyle={textStyle}
+                                text={displayText}
                                 cursorColor="black"
-                                typeSpeed={25}
-                                hideCursorAfterText={true}
-                            />
-                        </div>
-
-                        <div style={{ fontWeight: 'bold', fontSize: '2rem', marginBottom: '2rem', lineHeight: '1.2' }}>
-                            Hindi
-                        </div>
-
-                        <div className='typewriter2'>
-                            <TypewriterEffect
-                                textStyle={
-                                    { fontWeight: '400', fontSize: '1.2rem', marginBottom: '2rem' }
-                                }
-                                startDelay={2000}
-                                cursorColor="black"
-                                text={texts[1]}
-                                typeSpeed={25}
-                                hideCursorAfterText={true}
-                            />
-                        </div>
-
-                        <div style={{ fontWeight: 'bold', fontSize: '2rem', marginBottom: '2rem', lineHeight: '1.2' }}>
-                            Gujarati
-                        </div>
-
-                        <div className='typewriter3'>
-                            <TypewriterEffect
-                                textStyle={
-                                    { fontWeight: '400', fontSize: '1.2rem', marginBottom: '2rem' }
-                                }
-                                startDelay={2000}
-                                cursorColor="black"
-                                text={texts[2]}
-                                typeSpeed={25}
-                                hideCursorAfterText={true}
-                            />
-                        </div>
-                        <div style={{ fontWeight: 'bold', fontSize: '2rem', marginBottom: '2rem', lineHeight: '1.2' }}>
-                            Braille
-                        </div>
-
-                        <div className='typewriter4'>
-                            <TypewriterEffect
-                                textStyle={
-                                    { fontWeight: '400', fontSize: '1.2rem', marginBottom: '2rem' }
-                                }
-                                startDelay={2000}
-                                cursorColor="black"
-                                text={braille.toBraille(texts[0])}
-                                typeSpeed={25}
+                                typeSpeed={1}
                                 hideCursorAfterText={true}
                             />
                         </div>
                     </Col>
-                    
-                </Row>
-                <Row>
-                    
                 </Row>
             </Container>
         );
