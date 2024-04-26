@@ -5,9 +5,7 @@ import InputField from '../components/Input';
 
 class Extractive extends Component {
     render () {
-        const headingStyle = {
-            textAlign: 'center'
-        };
+      
 
         return (
             <div className="container">

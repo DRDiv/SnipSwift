@@ -36,10 +36,10 @@ class InputField extends Component {
                 result=result.data;
                 
                 var textTemp;
-                if (this.state.index=='1'){
+                if (this.state.index==='1'){
                     textTemp=[result["original_trans"],result["original_trans_hin"],result["original_trans_guj"]];
                 }
-                else if (this.state.index=='2'){
+                else if (this.state.index==='2'){
                     textTemp=[result["abstractive_data"]["eng_summary"],result["abstractive_data"]["hind_summary"],result["abstractive_data"]["guj_summary"]];
 
                 }

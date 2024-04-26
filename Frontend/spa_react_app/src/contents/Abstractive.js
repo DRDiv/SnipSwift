@@ -5,9 +5,7 @@ import TypewriterEffect from "react-typewriter-effect";
 
 class Abstractive extends Component {
     render () {
-        const headingStyle = {
-            textAlign: 'center'
-        };
+       
 
         return (
             <div className="container">

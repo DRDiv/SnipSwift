@@ -14,7 +14,7 @@ import Home from './contents/Home';
 import Abstractive from './contents/Abstractive';
 import Transcript from './contents/Transcript';
 import Extractive from './contents/Extractive';
-import TextDisplay from './contents/TextDisplay';
+
 
 
 import logo from './assets/resources/logo_transprntbk.png';
